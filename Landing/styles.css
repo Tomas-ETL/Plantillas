@@ -486,3 +486,47 @@ body {
         font-size: 1.875rem;
     }
 }
+
+/* Modificación al footer-bottom existente */
+.footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid #1F2937;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* Estilos de las redes sociales */
+.social-networks {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9CA3AF;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #F3F4F6;
+}
+
+.social-link svg {
+    /* Mantiene los iconos proporcionados y evita que se deformen */
+    flex-shrink: 0;
+}

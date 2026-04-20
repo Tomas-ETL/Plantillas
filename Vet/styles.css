@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --color-primary: #14B8A6;
     --color-secondary: #F59E0B;
@@ -35,6 +39,11 @@ body {
     padding: 0 24px;
 }
 
+section {
+    scroll-margin-top: 100px;
+    /* Evita que el header tape el título al hacer scroll */
+}
+
 /* Mesh Gradient Background */
 .mesh-gradient {
     position: fixed;
@@ -43,6 +52,8 @@ body {
     right: 0;
     bottom: 0;
     z-index: -1;
+    pointer-events: none;
+    /* Asegura que no interfiera con clics */
     background: linear-gradient(135deg,
             rgba(240, 253, 250, 0.8) 0%,
             rgba(254, 252, 232, 0.6) 25%,
@@ -364,6 +375,10 @@ body {
     box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1);
 }
 
+.form-group input:invalid {
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -541,13 +556,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     transition: all 0.3s;
     background: white;
     font-weight: 500;
 }
 
-.calendar-day:hover {
+.calendar-day:not(.disabled):not(.other-month) {
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.calendar-day:not(.disabled):not(.other-month):hover {
     border-color: var(--color-primary);
     transform: scale(1.05);
 }
@@ -561,11 +580,6 @@ body {
 .calendar-day.disabled {
     opacity: 0.3;
     cursor: not-allowed;
-}
-
-.calendar-day.disabled:hover {
-    border-color: transparent;
-    transform: none;
 }
 
 .calendar-day.other-month {

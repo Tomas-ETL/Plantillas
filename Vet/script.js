@@ -1,35 +1,20 @@
 // Registration State
 let currentStep = 1;
 let selectedPetType = null;
-let registrationData = {
-    owner: {},
-    pet: {}
-};
+let registrationData = { owner: {}, pet: {} };
 
 // Booking State
 let selectedDate = null;
 let selectedService = null;
 let selectedTime = null;
-let currentMonth = new Date(2026, 3, 1); // April 2026
+let currentMonth = new Date(2026, 3, 1); // Abril 2026
 
-// Initialize
 document.addEventListener('DOMContentLoaded', function () {
     initializeFormListeners();
     renderCalendar();
-
-    // Smooth scroll for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
 });
 
-// Smooth scroll helper
+// Helper de navegación suavizada
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -37,134 +22,93 @@ function scrollToSection(sectionId) {
     }
 }
 
-// Form Step Navigation
+// Navegación de Formulario (Registro)
 function nextStep() {
-    if (currentStep === 1) {
-        // Validate step 1
-        const name = document.getElementById('ownerName').value;
-        const email = document.getElementById('ownerEmail').value;
-        const phone = document.getElementById('ownerPhone').value;
+    const name = document.getElementById('ownerName').value;
+    const email = document.getElementById('ownerEmail').value;
+    const phone = document.getElementById('ownerPhone').value;
 
-        if (!name || !email || !phone) {
-            alert('Por favor completa todos los campos requeridos');
-            return;
-        }
-
-        registrationData.owner = {
-            name,
-            email,
-            phone,
-            address: document.getElementById('ownerAddress').value
-        };
-
-        currentStep = 2;
-        updateFormSteps();
+    if (!name || !email || !phone) {
+        alert('Por favor completa todos los campos requeridos del dueño.');
+        return;
     }
+
+    registrationData.owner = {
+        name,
+        email,
+        phone,
+        address: document.getElementById('ownerAddress').value
+    };
+
+    currentStep = 2;
+    updateFormSteps();
 }
 
 function prevStep() {
-    if (currentStep === 2) {
-        currentStep = 1;
-        updateFormSteps();
-    }
+    currentStep = 1;
+    updateFormSteps();
 }
 
 function updateFormSteps() {
-    // Update step indicators
     document.querySelectorAll('.step').forEach(step => {
-        const stepNum = parseInt(step.dataset.step);
-        if (stepNum === currentStep) {
-            step.classList.add('active');
-        } else {
-            step.classList.remove('active');
-        }
+        step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
     });
-
-    // Update form visibility
-    document.querySelectorAll('.form-step').forEach(form => {
-        form.classList.remove('active');
+    document.querySelectorAll('.form-step').forEach((form, index) => {
+        form.classList.toggle('active', index + 1 === currentStep);
     });
-    document.getElementById(`step${currentStep}`).classList.add('active');
 }
 
-// Form Input Listeners for Live Preview
+// Live Preview
 function initializeFormListeners() {
-    // Owner inputs
-    document.getElementById('ownerName').addEventListener('input', function (e) {
-        document.getElementById('previewOwnerName').textContent = e.target.value || '-';
+    const mappings = {
+        'ownerName': 'previewOwnerName',
+        'ownerEmail': 'previewOwnerEmail',
+        'ownerPhone': 'previewOwnerPhone',
+        'petName': 'previewPetName'
+    };
+
+    Object.keys(mappings).forEach(id => {
+        document.getElementById(id).addEventListener('input', (e) => {
+            document.getElementById(mappings[id]).textContent = e.target.value || '-';
+            if (id === 'petName') updatePetPreview();
+        });
     });
 
-    document.getElementById('ownerEmail').addEventListener('input', function (e) {
-        document.getElementById('previewOwnerEmail').textContent = e.target.value || '-';
-    });
-
-    document.getElementById('ownerPhone').addEventListener('input', function (e) {
-        document.getElementById('previewOwnerPhone').textContent = e.target.value || '-';
-    });
-
-    // Pet inputs
-    document.getElementById('petName').addEventListener('input', function (e) {
-        document.getElementById('previewPetName').textContent = e.target.value || '-';
-        updatePetPreview();
-    });
-
-    document.getElementById('petBreed').addEventListener('input', function (e) {
-        updatePetPreview();
-    });
-
-    document.getElementById('petAge').addEventListener('input', function (e) {
-        updatePetPreview();
-    });
+    document.getElementById('petBreed').addEventListener('input', updatePetPreview);
+    document.getElementById('petAge').addEventListener('input', updatePetPreview);
 }
 
 function updatePetPreview() {
     const breed = document.getElementById('petBreed').value;
     const age = document.getElementById('petAge').value;
 
-    let info = '';
-    if (breed && age) {
-        info = `${breed}, ${age} años`;
-    } else if (breed) {
-        info = breed;
-    } else if (age) {
-        info = `${age} años`;
-    } else {
-        info = '-';
-    }
+    let info = '-';
+    if (breed && age) info = `${breed}, ${age} años`;
+    else if (breed) info = breed;
+    else if (age) info = `${age} años`;
 
     document.getElementById('previewPetInfo').textContent = info;
 }
 
-// Pet Type Selection
-function selectPetType(type) {
+// Selección de Mascota
+function selectPetType(type, event) {
     selectedPetType = type;
+    document.querySelectorAll('.pet-type-option').forEach(opt => opt.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
 
-    // Update UI
-    document.querySelectorAll('.pet-type-option').forEach(option => {
-        option.classList.remove('selected');
-    });
-    document.querySelector(`[data-type="${type}"]`).classList.add('selected');
-
-    // Update preview avatar
-    const avatars = {
-        dog: '🐕',
-        cat: '🐱',
-        bird: '🐦',
-        other: '🐰'
-    };
+    const avatars = { dog: '🐕', cat: '🐱', bird: '🐦', other: '🐰' };
     document.getElementById('previewPetAvatar').textContent = avatars[type];
 }
 
-// Registration Submission
-function submitRegistration(event) {
-    event.preventDefault();
-
+// Envío del registro
+function submitRegistration(e) {
+    e.preventDefault();
     const petName = document.getElementById('petName').value;
     const petBreed = document.getElementById('petBreed').value;
     const petAge = document.getElementById('petAge').value;
 
-    if (!petName || !petBreed || !petAge || !selectedPetType) {
-        alert('Por favor completa todos los campos y selecciona el tipo de mascota');
+    if (!petName || !selectedPetType) {
+        alert('Por favor completa el nombre de la mascota y selecciona su tipo.');
         return;
     }
 
@@ -176,15 +120,15 @@ function submitRegistration(event) {
         notes: document.getElementById('petNotes').value
     };
 
-    alert('¡Registro completado exitosamente!\n\nDueño: ' + registrationData.owner.name + '\nMascota: ' + registrationData.pet.name);
+    alert(`¡Registro completado exitosamente!\n\nDueño: ${registrationData.owner.name}\nMascota: ${registrationData.pet.name}`);
 
-    // Reset form
+    // Limpieza de formulario
     currentStep = 1;
     updateFormSteps();
     document.getElementById('step1').reset();
     document.getElementById('step2').reset();
 
-    // Reset preview
+    // Limpiar vista previa
     document.getElementById('previewOwnerName').textContent = '-';
     document.getElementById('previewOwnerEmail').textContent = '-';
     document.getElementById('previewOwnerPhone').textContent = '-';
@@ -193,132 +137,108 @@ function submitRegistration(event) {
     document.getElementById('previewPetAvatar').textContent = '🐾';
 
     selectedPetType = null;
-    document.querySelectorAll('.pet-type-option').forEach(option => {
-        option.classList.remove('selected');
-    });
+    document.querySelectorAll('.pet-type-option').forEach(opt => opt.classList.remove('selected'));
 }
 
-// Calendar Functions
+// Lógica del Calendario
 function renderCalendar() {
     const year = currentMonth.getFullYear();
     const month = currentMonth.getMonth();
+    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    // Update header
-    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     document.getElementById('calendarMonth').textContent = `${monthNames[month]} ${year}`;
 
-    // Calculate days
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startingDayOfWeek = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; // Adjust for Monday start
+    const today = new Date();
+
+    // Ajuste para que la semana empiece en Lunes (Lunes = 0, Domingo = 6)
+    let startingDayOfWeek = firstDay.getDay() - 1;
+    if (startingDayOfWeek === -1) startingDayOfWeek = 6;
 
     const calendarDays = document.getElementById('calendarDays');
     calendarDays.innerHTML = '';
 
-    // Add previous month's days
+    // Días del mes anterior
     const prevMonthLastDay = new Date(year, month, 0).getDate();
     for (let i = startingDayOfWeek - 1; i >= 0; i--) {
-        const day = prevMonthLastDay - i;
-        const dayElement = createDayElement(day, true, false);
-        calendarDays.appendChild(dayElement);
+        const div = document.createElement('div');
+        div.className = 'calendar-day other-month';
+        div.textContent = prevMonthLastDay - i;
+        calendarDays.appendChild(div);
     }
 
-    // Add current month's days
-    const today = new Date();
-    for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day);
-        const isPast = date < today.setHours(0, 0, 0, 0);
-        const dayElement = createDayElement(day, false, isPast);
-        calendarDays.appendChild(dayElement);
+    // Días del mes actual
+    for (let day = 1; day <= lastDay.getDate(); day++) {
+        const div = document.createElement('div');
+        div.className = 'calendar-day';
+        div.textContent = day;
+
+        const currentDate = new Date(year, month, day);
+        const isPast = currentDate < today.setHours(0, 0, 0, 0);
+
+        if (isPast) {
+            div.classList.add('disabled');
+        } else {
+            div.onclick = (e) => selectDate(day, e);
+        }
+
+        calendarDays.appendChild(div);
     }
 
-    // Add next month's days
-    const remainingCells = 42 - (startingDayOfWeek + daysInMonth);
+    // Días del próximo mes
+    const daysRendered = startingDayOfWeek + lastDay.getDate();
+    const remainingCells = 42 - daysRendered; // Grilla de 6x7
+
     for (let day = 1; day <= remainingCells; day++) {
-        const dayElement = createDayElement(day, true, false);
-        calendarDays.appendChild(dayElement);
+        const div = document.createElement('div');
+        div.className = 'calendar-day other-month';
+        div.textContent = day;
+        calendarDays.appendChild(div);
     }
-}
-
-function createDayElement(day, isOtherMonth, isPast) {
-    const dayElement = document.createElement('div');
-    dayElement.className = 'calendar-day';
-    dayElement.textContent = day;
-
-    if (isOtherMonth) {
-        dayElement.classList.add('other-month');
-    }
-
-    if (isPast && !isOtherMonth) {
-        dayElement.classList.add('disabled');
-    } else if (!isOtherMonth) {
-        dayElement.addEventListener('click', function () {
-            selectDate(day);
-        });
-    }
-
-    return dayElement;
-}
-
-function selectDate(day) {
-    selectedDate = day;
-
-    document.querySelectorAll('.calendar-day').forEach(dayEl => {
-        dayEl.classList.remove('selected');
-    });
-
-    event.target.classList.add('selected');
 }
 
 function changeMonth(direction) {
-    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + direction, 1);
+    currentMonth.setMonth(currentMonth.getMonth() + direction);
     renderCalendar();
 }
 
-// Service Selection
-function selectService(service) {
-    selectedService = service;
-
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.classList.remove('selected');
-    });
-
-    event.target.closest('.service-card').classList.add('selected');
-}
-
-// Time Selection
-function selectTime(time) {
-    selectedTime = time;
-
-    document.querySelectorAll('.time-slot').forEach(slot => {
-        slot.classList.remove('selected');
-    });
-
+// Selecciones de Citas
+function selectDate(day, event) {
+    selectedDate = day;
+    document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
     event.target.classList.add('selected');
 }
 
-// Booking Confirmation
+function selectService(service, event) {
+    selectedService = service;
+    document.querySelectorAll('.service-card').forEach(s => s.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+}
+
+function selectTime(time, event) {
+    selectedTime = time;
+    document.querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+    event.target.classList.add('selected');
+}
+
 function confirmBooking() {
     if (!selectedDate || !selectedService || !selectedTime) {
-        alert('Por favor selecciona una fecha, servicio y horario');
+        alert('Por favor selecciona una fecha, servicio y horario.');
         return;
     }
 
-    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    const month = monthNames[currentMonth.getMonth()];
+    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const monthName = monthNames[currentMonth.getMonth()];
     const year = currentMonth.getFullYear();
 
-    alert(`¡Cita confirmada!\n\nFecha: ${selectedDate} de ${month} ${year}\nHora: ${selectedTime}\nServicio: ${selectedService}`);
+    alert(`¡Cita confirmada!\n\nFecha: ${selectedDate} de ${monthName} ${year}\nHora: ${selectedTime}\nServicio: ${selectedService}`);
 
-    // Reset selections
+    // Limpiar selecciones
     selectedDate = null;
     selectedService = null;
     selectedTime = null;
 
-    document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
-    document.querySelectorAll('.service-card.selected').forEach(el => el.classList.remove('selected'));
-    document.querySelectorAll('.time-slot.selected').forEach(el => el.classList.remove('selected'));
+    document.querySelectorAll('.calendar-day.selected, .service-card.selected, .time-slot.selected')
+        .forEach(el => el.classList.remove('selected'));
 }

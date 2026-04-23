@@ -137,9 +137,16 @@ ion-toolbar {
 }
 
 .chart-container {
-    height: 180px;
+    height: 250px;
     position: relative;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+canvas {
+    max-width: 100% !important;
+    width: 100% !important;
 }
 
 /* Search */
@@ -354,7 +361,10 @@ h4 { margin: 2px 0; font-size: 1.05rem; font-weight: 600; }
     .desktop-only { display: none; }
     .mobile-only { display: block; }
     .valor-card { order: -1; } /* Move total value to top */
-    .chart-container { height: 220px; }
+    .chart-container { 
+        height: 200px; 
+        max-width: calc(100vw - 64px); /* Forzar que no exceda el ancho de pantalla */
+    }
 }
 
 @media (max-width: 480px) {

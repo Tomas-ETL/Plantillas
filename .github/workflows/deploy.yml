@@ -48,6 +48,9 @@ jobs:
       - name: Build Ionic
         run: |
           cd Inventario
+          # Inyectar las claves en el archivo de producción antes de compilar
+          sed -i "s|SUPABASE_URL_PLACEHOLDER|${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}|g" src/environments/environment.prod.ts
+          sed -i "s|SUPABASE_KEY_PLACEHOLDER|${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}|g" src/environments/environment.prod.ts
           # Compilamos con base-href para que funcione en subcarpeta
           npx ng build --configuration production --base-href /Plantillas/inventario-movil/
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { IonHeader, IonToolbar, IonContent, IonTitle } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonContent } from '@ionic/angular/standalone';
 import { Chart, registerables } from 'chart.js';
 import { SupabaseService } from '../services/supabase.service';
 import { Producto } from '../types/database.types';
@@ -13,7 +13,7 @@ Chart.register(...registerables);
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, IonHeader, IonToolbar, IonContent, IonTitle]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, IonHeader, IonToolbar, IonContent]
 })
 export class DashboardPage implements OnInit, AfterViewInit {
   @ViewChild('barChartCanvas') barChartCanvas!: ElementRef;

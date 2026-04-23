@@ -60,8 +60,8 @@ jobs:
           mkdir -p deployment
           # Copiamos Next.js a la raíz o subcarpeta
           cp -r servicio-inventario/out deployment/inventario-web
-          # Copiamos Ionic a su subcarpeta
-          cp -r Inventario/www/browser deployment/inventario-movil
+          # Copiamos Ionic a su subcarpeta (usando la ruta correcta 'www')
+          cp -r Inventario/www deployment/inventario-movil
           # Creamos un index.html simple en la raíz para redirigir o elegir
           echo '<!DOCTYPE html><html><body style="font-family:sans-serif; text-align:center; padding: 50px;"><h1>Panel de Inventario</h1><p><a href="./inventario-web">Ir a Versión Web (Next.js)</a></p><p><a href="./inventario-movil">Ir a Versión Móvil (Ionic)</a></p></body></html>' > deployment/index.html
 

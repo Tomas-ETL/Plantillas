@@ -1,7 +1,48 @@
-import { createProducto } from '../actions';
+'use client';
+
+import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function NuevoProductoPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const nombre = formData.get('nombre') as string;
+    const sku = formData.get('sku') as string;
+    const descripcion = formData.get('descripcion') as string;
+    const precio = parseFloat(formData.get('precio') as string) || 0;
+    const stock_actual = parseInt(formData.get('stock_actual') as string) || 0;
+    const stock_minimo = parseInt(formData.get('stock_minimo') as string) || 5;
+    const categoria = formData.get('categoria') as string;
+
+    try {
+      const { error } = await supabase.from('productos').insert({
+        nombre,
+        sku: sku ? sku : null,
+        descripcion,
+        precio,
+        stock_actual,
+        stock_minimo,
+        categoria,
+      });
+
+      if (error) throw error;
+
+      router.push('/dashboard/productos');
+    } catch (error: any) {
+      alert('Error al crear el producto: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
@@ -18,7 +59,7 @@ export default function NuevoProductoPage() {
       </div>
 
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-        <form action={createProducto} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="space-y-2 sm:col-span-2">
               <label htmlFor="nombre" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Nombre del producto *</label>
@@ -60,8 +101,12 @@ export default function NuevoProductoPage() {
             <Link href="/dashboard/productos" className="px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors">
               Cancelar
             </Link>
-            <button type="submit" className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors">
-              Guardar Producto
+            <button 
+              type="submit" 
+              disabled={loading}
+              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors disabled:opacity-50"
+            >
+              {loading ? 'Guardando...' : 'Guardar Producto'}
             </button>
           </div>
         </form>

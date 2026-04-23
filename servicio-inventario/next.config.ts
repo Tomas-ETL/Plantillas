@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true, // GitHub Pages no soporta optimización de imágenes nativa de Next
   },
+  basePath: '/Plantillas/inventario-web',
 };
 
 export default nextConfig;

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Japanese Cherry Blossom</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body style="background-color: #FFF8FA;" class="min-h-screen relative overflow-x-hidden text-[#3D2E2E]">
+
+    <div id="petals-container" class="fixed inset-0 pointer-events-none overflow-hidden z-10"></div>
+
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0"
+                style="background-image: url('https://images.unsplash.com/photo-1648935019635-e9e21ba935c8?w=1600'); background-size: cover; background-position: center; filter: brightness(0.4);">
+            </div>
+            <div class="absolute inset-0"
+                style="background: linear-gradient(to bottom, rgba(255, 20, 147, 0.3), rgba(139, 69, 19, 0.4));"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 animate-heroFade">
+            <div class="mb-8">
+                <h1 class="text-9xl mb-4"
+                    style="font-family: 'Cormorant Garamond', serif; font-weight: 300; color: #FFE4E1; text-shadow: 0 0 40px rgba(255, 20, 147, 0.8), 0 0 80px rgba(255, 105, 180, 0.5); letter-spacing: 0.1em;">
+                    桜
+                </h1>
+                <div class="h-1 w-32 mx-auto mb-6"
+                    style="background: linear-gradient(to right, transparent, #FF69B4, transparent);"></div>
+                <h2 class="text-6xl mb-6"
+                    style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #FFFFFF; letter-spacing: 0.05em;">
+                    Sakura
+                </h2>
+                <p class="text-2xl max-w-3xl mx-auto leading-relaxed"
+                    style="color: #FFE4E1; font-family: 'Lora', serif; font-style: italic;">
+                    La efímera belleza de los cerezos japoneses nos enseña<br />
+                    que lo más hermoso de la vida es precisamente su brevedad
+                </p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <div class="text-white text-4xl opacity-80">↓</div>
+        </div>
+    </section>
+
+    <section class="relative py-32 px-6" style="background: linear-gradient(to bottom, #FFF8FA, #FFE4E1);">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 animate-slideLeft">
+                    <div class="relative">
+                        <div
+                            class="absolute -inset-4 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] rounded-3xl opacity-20 blur-2xl">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1619484537774-7e7b877ae4b5?w=900"
+                            alt="Flores de cerezo" class="relative rounded-3xl shadow-2xl w-full"
+                            style="aspect-ratio: 4/3; object-fit: cover;" />
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 animate-slideRight">
+                    <div class="inline-block px-6 py-2 mb-6 rounded-full"
+                        style="background-color: #FF1493; color: #FFF;">
+                        <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem;">花見</span>
+                    </div>
+                    <h3 class="text-5xl mb-8"
+                        style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #6B4423; line-height: 1.2;">
+                        El Arte de<br />Contemplar las Flores
+                    </h3>
+                    <div class="space-y-6 text-xl leading-relaxed" style="color: #3D2E2E;">
+                        <p>
+                            El <em style="color: #FF1493;">hanami</em> es una tradición milenaria que celebra
+                            la floración de los cerezos. Durante apenas dos semanas cada primavera, Japón se transforma
+                            en un mar de pétalos rosados.
+                        </p>
+                        <p>
+                            Más que admirar flores, el hanami es una meditación sobre
+                            <em style="color: #FF1493;"> mono no aware</em> (物の哀れ): la consciencia de
+                            la impermanencia y la belleza melancólica de las cosas pasajeras.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-24 px-6" style="background-color: #FFF8FA;">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 animate-staggerFade">
+                <div class="relative group overflow-hidden rounded-2xl shadow-xl" style="aspect-ratio: 3/4;">
+                    <img src="https://images.unsplash.com/photo-1708268003210-c250f427e81b?w=600" alt="Ramas de cerezo"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-[#FF1493] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity">
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl shadow-xl md:mt-12" style="aspect-ratio: 3/4;">
+                    <img src="https://images.unsplash.com/photo-1708268002023-fa2576ec2cd7?w=600" alt="Cerezo en flor"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-[#FFC0CB] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity">
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl shadow-xl" style="aspect-ratio: 3/4;">
+                    <img src="https://images.unsplash.com/photo-1708268002204-88dd2f8c499a?w=600" alt="Flores de sakura"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-[#8B4513] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-32 px-6" style="background: linear-gradient(135deg, #FF1493, #FFC0CB);">
+        <div class="max-w-4xl mx-auto text-center animate-fadeIn">
+            <div class="mb-12">
+                <h3 class="text-6xl mb-8"
+                    style="font-family: 'Cormorant Garamond', serif; font-weight: 300; color: #FFFFFF; letter-spacing: 0.1em;">
+                    一期一会
+                </h3>
+                <p class="text-3xl mb-4"
+                    style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #FFF5F7;">
+                    Ichi-go ichi-e
+                </p>
+                <div class="h-1 w-24 mx-auto mb-8" style="background-color: #FFFFFF;"></div>
+            </div>
+
+            <p class="text-2xl leading-relaxed mb-12"
+                style="color: #FFF5F7; font-family: 'Lora', serif; font-style: italic;">
+                "Un encuentro, una oportunidad"
+            </p>
+
+            <p class="text-xl leading-relaxed max-w-3xl mx-auto" style="color: #FFFFFF;">
+                Como los pétalos de sakura que caen y nunca vuelven, cada momento es único e irrepetible.
+                Los cerezos nos enseñan a valorar el presente, a encontrar belleza en lo transitorio,
+                y a celebrar la vida en su forma más pura y efímera.
+            </p>
+        </div>
+    </section>
+
+    <section class="relative py-32 px-6" style="background-color: #FFF8FA;">
+        <div class="max-w-7xl mx-auto">
+            <h3 class="text-5xl text-center mb-20 animate-fadeIn"
+                style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #6B4423;">
+                El Significado del Sakura
+            </h3>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group animate-cardFade" style="animation-delay: 0.1s;">
+                    <div class="relative h-full p-8 rounded-2xl transition-all duration-500 group-hover:-translate-y-4"
+                        style="background-color: #FFFFFF; box-shadow: 0 10px 40px rgba(255, 105, 180, 0.1);">
+                        <div class="mb-6 text-6xl">🌸</div>
+                        <h4 class="text-2xl mb-4"
+                            style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #FF1493;">
+                            Renovación</h4>
+                        <p class="leading-relaxed" style="color: #3D2E2E;">La floración marca el inicio de la primavera
+                            y simboliza nuevos comienzos en la cultura japonesa.</p>
+                    </div>
+                </div>
+
+                <div class="group animate-cardFade" style="animation-delay: 0.2s;">
+                    <div class="relative h-full p-8 rounded-2xl transition-all duration-500 group-hover:-translate-y-4"
+                        style="background-color: #FFFFFF; box-shadow: 0 10px 40px rgba(139, 69, 19, 0.1);">
+                        <div class="mb-6 text-6xl">🌳</div>
+                        <h4 class="text-2xl mb-4"
+                            style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #8B4513;">
+                            Fortaleza</h4>
+                        <p class="leading-relaxed" style="color: #3D2E2E;">El tronco del cerezo representa la
+                            resistencia y la capacidad de florecer año tras año.</p>
+                    </div>
+                </div>
+
+                <div class="group animate-cardFade" style="animation-delay: 0.3s;">
+                    <div class="relative h-full p-8 rounded-2xl transition-all duration-500 group-hover:-translate-y-4"
+                        style="background-color: #FFFFFF; box-shadow: 0 10px 40px rgba(168, 213, 186, 0.2);">
+                        <div class="mb-6 text-6xl">🍃</div>
+                        <h4 class="text-2xl mb-4"
+                            style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #6B8E76;">Armonía
+                        </h4>
+                        <p class="leading-relaxed" style="color: #3D2E2E;">La conexión con la naturaleza y el ciclo de
+                            las estaciones es esencial en la filosofía japonesa.</p>
+                    </div>
+                </div>
+
+                <div class="group animate-cardFade" style="animation-delay: 0.4s;">
+                    <div class="relative h-full p-8 rounded-2xl transition-all duration-500 group-hover:-translate-y-4"
+                        style="background-color: #FFFFFF; box-shadow: 0 10px 40px rgba(255, 192, 203, 0.15);">
+                        <div class="mb-6 text-6xl">💮</div>
+                        <h4 class="text-2xl mb-4"
+                            style="font-family: 'Cormorant Garamond', serif; font-weight: 600; color: #FFC0CB;">Belleza
+                        </h4>
+                        <p class="leading-relaxed" style="color: #3D2E2E;">La perfección efímera nos recuerda apreciar
+                            cada momento de hermosura en nuestras vidas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative h-screen">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1708268002438-047c84a54f3a?w=1600"
+                alt="Cerezo japonés en primavera" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF1493]/30 to-[#6B4423]/50"></div>
+        </div>
+        <div class="relative z-10 h-full flex items-end justify-center pb-24 px-6">
+            <div class="text-center max-w-3xl animate-fadeIn">
+                <p class="text-4xl leading-relaxed"
+                    style="font-family: 'Cormorant Garamond', serif; font-weight: 500; color: #FFFFFF; text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);">
+                    "Las flores no permanecen,<br />
+                    ni la luna brilla eternamente.<br />
+                    Todo en este mundo es transitorio."
+                </p>
+                <p class="mt-6 text-xl" style="color: #FFE4E1; font-style: italic;">
+                    — Proverbio japonés
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="relative py-20 px-6 text-center" style="background: linear-gradient(to top, #6B4423, #8B4513);">
+        <div class="max-w-4xl mx-auto animate-fadeIn">
+            <div class="text-8xl mb-8"
+                style="font-family: 'Cormorant Garamond', serif; font-weight: 300; color: #FFE4E1; opacity: 0.6;">
+                桜
+            </div>
+            <p class="text-xl" style="color: #FFC0CB; font-style: italic;">
+                Celebrando la belleza efímera de la naturaleza
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

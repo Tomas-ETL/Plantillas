@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovatech Solutions - Empresa de Tecnología</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <div class="nav-content">
+                <div class="logo">
+                    <h2>Innovatech Solutions</h2>
+                </div>
+
+                <div class="nav-links" id="navLinks">
+                    <button onclick="scrollToSection('inicio')" class="nav-link">Inicio</button>
+                    <button onclick="scrollToSection('historia')" class="nav-link">Historia</button>
+                    <button onclick="scrollToSection('anecdotas')" class="nav-link">Anécdotas</button>
+                    <button onclick="scrollToSection('servicios')" class="nav-link">Servicios</button>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMenu()">
+                    <span class="menu-icon" id="menuIcon">☰</span>
+                </button>
+            </div>
+
+            <div class="mobile-menu" id="mobileMenu">
+                <button onclick="scrollToSection('inicio'); closeMenu()" class="mobile-link">Inicio</button>
+                <button onclick="scrollToSection('historia'); closeMenu()" class="mobile-link">Historia</button>
+                <button onclick="scrollToSection('anecdotas'); closeMenu()" class="mobile-link">Anécdotas</button>
+                <button onclick="scrollToSection('servicios'); closeMenu()" class="mobile-link">Servicios</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <img src="https://images.unsplash.com/photo-1770777843445-2a1621b1201d?w=1920"
+            alt="Equipo trabajando en oficina moderna" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Bienvenido a Innovatech Solutions</h1>
+            <h2 class="hero-subtitle">Transformando Ideas en Soluciones Digitales</h2>
+            <p class="hero-text">
+                Desde 2010, ayudamos a empresas a alcanzar su máximo potencial tecnológico con soluciones innovadoras y
+                personalizadas
+            </p>
+            <button onclick="scrollToSection('servicios')" class="hero-button">
+                Conoce nuestros servicios
+                <span class="arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Historia Section -->
+    <section id="historia" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestra Historia</h2>
+                <p class="section-description">
+                    Un viaje de innovación, perseverancia y éxito que comenzó hace más de una década
+                </p>
+            </div>
+
+            <div class="history-grid">
+                <div class="history-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <span class="icon">📅</span>
+                        </div>
+                        <div class="card-text">
+                            <div class="year">2010</div>
+                            <h3>Nuestros Inicios</h3>
+                            <p>Todo comenzó en un pequeño garaje con dos cofundadores y un sueño: democratizar la
+                                tecnología para empresas de todos los tamaños.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <span class="icon">👥</span>
+                        </div>
+                        <div class="card-text">
+                            <div class="year">2015</div>
+                            <h3>Expansión del Equipo</h3>
+                            <p>Alcanzamos los 50 empleados y abrimos nuestra primera oficina internacional en Barcelona,
+                                marcando el inicio de nuestra expansión global.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <span class="icon">📈</span>
+                        </div>
+                        <div class="card-text">
+                            <div class="year">2020</div>
+                            <h3>Crecimiento Exponencial</h3>
+                            <p>A pesar de los desafíos globales, triplicamos nuestra base de clientes y lanzamos nuestra
+                                plataforma cloud que revolucionó el mercado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-card">
+                    <div class="card-content">
+                        <div class="icon-box">
+                            <span class="icon">🏆</span>
+                        </div>
+                        <div class="card-text">
+                            <div class="year">2024</div>
+                            <h3>Reconocimiento Internacional</h3>
+                            <p>Recibimos el premio "Tech Innovation Leader" y alcanzamos más de 1,000 clientes en 30
+                                países alrededor del mundo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anécdotas Section -->
+    <section id="anecdotas" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2>Anécdotas que Nos Definen</h2>
+                <p class="section-description">
+                    Historias reales de momentos que marcaron nuestro camino y nos recordaron por qué hacemos lo que
+                    hacemos
+                </p>
+            </div>
+
+            <div class="anecdotes-grid">
+                <div class="anecdote-card">
+                    <div class="anecdote-icon">☕</div>
+                    <h3>El Café que lo Cambió Todo</h3>
+                    <p>Durante una pausa para el café en 2012, uno de nuestros desarrolladores derramó accidentalmente
+                        su bebida sobre el teclado. Frustrado, diseñó un prototipo de teclado resistente al agua que
+                        terminó convirtiéndose en uno de nuestros productos más vendidos.</p>
+                </div>
+
+                <div class="anecdote-card">
+                    <div class="anecdote-icon">💡</div>
+                    <h3>La Idea del Ascensor</h3>
+                    <p>Nuestra característica más popular nació de una conversación casual en el ascensor. Un ingeniero
+                        compartió su frustración con un cliente, y en 15 pisos desarrollaron mentalmente la solución que
+                        hoy usan miles de empresas.</p>
+                </div>
+
+                <div class="anecdote-card">
+                    <div class="anecdote-icon">⚡</div>
+                    <h3>Hackathon de 48 Horas</h3>
+                    <p>En 2018, organizamos un hackathon interno de fin de semana. El proyecto ganador, desarrollado sin
+                        dormir y a base de pizza, se convirtió en nuestra plataforma de análisis de datos con IA que hoy
+                        genera el 30% de nuestros ingresos.</p>
+                </div>
+
+                <div class="anecdote-card">
+                    <div class="anecdote-icon">❤️</div>
+                    <h3>El Cliente que Nos Enseñó</h3>
+                    <p>Un cliente nos rechazó tres veces seguidas. En lugar de rendirnos, les preguntamos qué
+                        necesitaban realmente. Sus respuestas transformaron completamente nuestra filosofía de producto
+                        y nos hicieron la empresa que somos hoy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nuestros Servicios</h2>
+                <p class="section-description">
+                    Soluciones tecnológicas integrales diseñadas para impulsar el crecimiento de tu negocio
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Desarrollo de Software</h3>
+                    <p>Creamos soluciones personalizadas desde aplicaciones web hasta sistemas empresariales complejos,
+                        utilizando las últimas tecnologías.</p>
+                    <ul class="service-features">
+                        <li><span class="bullet">•</span> Aplicaciones web progresivas</li>
+                        <li><span class="bullet">•</span> Sistemas empresariales</li>
+                        <li><span class="bullet">•</span> Integraciones API</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3>Soluciones Cloud</h3>
+                    <p>Migramos y optimizamos tu infraestructura en la nube para máxima eficiencia, escalabilidad y
+                        ahorro de costos.</p>
+                    <ul class="service-features">
+                        <li><span class="bullet">•</span> Migración a la nube</li>
+                        <li><span class="bullet">•</span> Arquitectura serverless</li>
+                        <li><span class="bullet">•</span> Optimización de costos</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Ciberseguridad</h3>
+                    <p>Protegemos tus activos digitales con auditorías exhaustivas, implementación de mejores prácticas
+                        y monitoreo continuo.</p>
+                    <ul class="service-features">
+                        <li><span class="bullet">•</span> Auditorías de seguridad</li>
+                        <li><span class="bullet">•</span> Protección de datos</li>
+                        <li><span class="bullet">•</span> Cumplimiento normativo</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Análisis de Datos</h3>
+                    <p>Transformamos tus datos en insights accionables con herramientas de BI, machine learning y
+                        visualización avanzada.</p>
+                    <ul class="service-features">
+                        <li><span class="bullet">•</span> Business Intelligence</li>
+                        <li><span class="bullet">•</span> Machine Learning</li>
+                        <li><span class="bullet">•</span> Dashboards interactivos</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Apps Móviles</h3>
+                    <p>Desarrollamos aplicaciones móviles nativas y multiplataforma que ofrecen experiencias
+                        excepcionales en iOS y Android.</p>
+                    <ul class="service-features">
+                        <li><span class="bullet">•</span> iOS & Android</li>
+                        <li><span class="bullet">•</span> React Native</li>
+                        <li><span class="bullet">•</span> Flutter</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎧</div>
+                    <h3>Soporte 24/7</h3>
+                    <p>Equipo de soporte técnico disponible todo el día, todos los días, para garantizar el
+                        funcionamiento continuo de tus sistemas.</p>
+                    <ul class="service-features">
+                        <li><span class="bullet">•</span> Soporte multicanal</li>
+                        <li><span class="bullet">•</span> SLA garantizado</li>
+                        <li><span class="bullet">•</span> Mantenimiento proactivo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-container">
+                <button class="cta-button">Solicita una Consulta Gratuita</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Innovatech Solutions</h3>
+                    <p class="footer-text">
+                        Transformando el futuro digital de las empresas con innovación, experiencia y pasión por la
+                        tecnología.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <span>contacto@innovatech.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📞</span>
+                            <span>+34 912 345 678</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>Madrid, España</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">𝕏</a>
+                        <a href="#" class="social-link">Git</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Innovatech Solutions. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./function.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <div class="container header-container">
+            <div class="header-left">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="main-title">Inventario</h1>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" (click)="openCategoryModal()" title="Categorías">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h7"></path>
+                    </svg>
+                </button>
+                <button class="btn-primary-small" (click)="openAddProductModal()">
+                    + Nuevo
+                </button>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+    <div class="container main-container">
+        <!-- Dashboard Cards -->
+        <div class="dashboard-grid">
+            <div class="card stat-card">
+                <div class="stat-content">
+                    <div>
+                        <p class="stat-label">Productos</p>
+                        <p class="stat-value">{{ stats.totalProducts }}</p>
+                    </div>
+                    <div class="stat-icon blue">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-content">
+                    <div>
+                        <p class="stat-label">Stock Bajo</p>
+                        <p class="stat-value">{{ stats.lowStock }}</p>
+                    </div>
+                    <div class="stat-icon red">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card stat-card valor-card">
+                <div class="stat-content">
+                    <div>
+                        <p class="stat-label">Valor Total</p>
+                        <p class="stat-value">${{ stats.totalValue | number:'1.2-2' }}</p>
+                    </div>
+                    <div class="stat-icon green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="card chart-card">
+                <h3 class="card-title">Categorías</h3>
+                <div class="chart-container">
+                    <canvas #barChartCanvas></canvas>
+                </div>
+            </div>
+
+            <div class="card chart-card">
+                <h3 class="card-title">Distribución</h3>
+                <div class="chart-container">
+                    <canvas #pieChartCanvas></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-section">
+            <div class="search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input
+                    type="text"
+                    (input)="handleSearch($event)"
+                    placeholder="Buscar productos..."
+                    class="search-input"
+                />
+            </div>
+        </div>
+
+        <!-- Products View -->
+        <div class="products-container">
+            <!-- Desktop Table -->
+            <div class="table-responsive desktop-only">
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Cant.</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (product of filteredProducts; track product.id) {
+                            <tr>
+                                <td>{{ product.sku || '-' }}</td>
+                                <td>{{ product.nombre }}</td>
+                                <td>{{ product.categoria }}</td>
+                                <td>{{ product.stock_actual }}</td>
+                                <td>${{ product.precio | number:'1.2-2' }}</td>
+                                <td>
+                                    @if (product.stock_actual <= product.stock_minimo) {
+                                        <span class="badge badge-danger">Bajo</span>
+                                    } @else {
+                                        <span class="badge badge-success">Ok</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="icon-btn" (click)="editProduct(product)">✏️</button>
+                                        <button class="icon-btn delete" (click)="deleteProduct(product.id)">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile List (Cards) -->
+            <div class="mobile-list mobile-only">
+                @for (product of filteredProducts; track product.id) {
+                    <div class="product-card">
+                        <div class="card-header">
+                            <div>
+                                <span class="sku">{{ product.sku || 'SIN SKU' }}</span>
+                                <h4>{{ product.nombre }}</h4>
+                            </div>
+                            <div class="badges">
+                                @if (product.stock_actual <= product.stock_minimo) {
+                                    <span class="badge badge-danger">Bajo</span>
+                                } @else {
+                                    <span class="badge badge-success">Normal</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <span>Stock: <strong>{{ product.stock_actual }}</strong></span>
+                                <span>Precio: <strong>${{ product.precio | number:'1.2-2' }}</strong></span>
+                            </div>
+                            <div class="row">
+                                <span class="cat">{{ product.categoria }}</span>
+                                <span class="loc">📍 {{ product.ubicacion || '-' }}</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn-edit" (click)="editProduct(product)">Editar</button>
+                            <button class="btn-delete" (click)="deleteProduct(product.id)">Eliminar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (filteredProducts.length === 0) {
+                <div class="empty-state">
+                    <p>No hay productos</p>
+                </div>
+            }
+        </div>
+    </div>
+</ion-content>
+
+<!-- Modales permanecen igual pero aseguramos que sean hijos del body si es necesario -->
+<!-- Product Modal -->
+<div class="modal" [class.active]="isModalOpen" (click)="closeProductModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2>{{ editingProductId ? 'Editar' : 'Nuevo' }} Producto</h2>
+            <button class="modal-close" (click)="closeProductModal()">✕</button>
+        </div>
+
+        <form [formGroup]="productForm" (ngSubmit)="handleFormSubmit()" class="modal-body">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Nombre *</label>
+                    <input type="text" formControlName="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>SKU</label>
+                    <input type="text" formControlName="sku">
+                </div>
+                <div class="form-group">
+                    <label>Categoría *</label>
+                    <select formControlName="categoria" required>
+                        <option value="">Seleccionar...</option>
+                        @for (cat of categorias; track cat.id) {
+                            <option [value]="cat.nombre">{{ cat.nombre }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ubicación</label>
+                    <input type="text" formControlName="ubicacion">
+                </div>
+                <div class="form-group">
+                    <label>Stock Actual *</label>
+                    <input type="number" formControlName="stock_actual" required>
+                </div>
+                <div class="form-group">
+                    <label>Stock Mínimo *</label>
+                    <input type="number" formControlName="stock_minimo" required>
+                </div>
+                <div class="form-group">
+                    <label>Precio *</label>
+                    <input type="number" formControlName="precio" step="0.01" required>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" (click)="closeProductModal()">Cerrar</button>
+                <button type="submit" class="btn-primary" [disabled]="productForm.invalid">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Category Modal -->
+<div class="modal" [class.active]="isCategoryModalOpen" (click)="closeCategoryModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()" style="max-width: 400px;">
+        <div class="modal-header">
+            <h2>Categorías</h2>
+            <button class="modal-close" (click)="closeCategoryModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="cat-input-row">
+                <input type="text" [(ngModel)]="categoryName" placeholder="Nueva categoría...">
+                <button (click)="saveCategory()" [disabled]="!categoryName.trim()">+</button>
+            </div>
+            <div class="cat-list">
+                @for (cat of categorias; track cat.id) {
+                    <div class="cat-item">
+                        <span>{{ cat.nombre }}</span>
+                        <div class="cat-actions">
+                            <button (click)="editCategory(cat)">✏️</button>
+                            <button (click)="deleteCategory(cat.id)" style="color: red;">✕</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

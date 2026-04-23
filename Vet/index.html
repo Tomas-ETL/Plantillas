@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetCare - Cuidamos a quienes más quieres</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="mesh-gradient"></div>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <span class="logo-icon" role="img" aria-label="paw">🐾</span>
+                    <span class="logo-text">VetCare</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                    <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="#registro" class="nav-link">Registro</a></li>
+                    <li><a href="#citas" class="nav-link">Citas</a></li>
+                </ul>
+                <button class="btn-primary" onclick="scrollToSection('citas')">Agendar Cita</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Cuidamos a quienes más quieres</h1>
+                <p class="hero-subtitle">Atención veterinaria premium con tecnología de vanguardia para el bienestar de
+                    tus mascotas</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary btn-large" onclick="scrollToSection('registro')">Registrar
+                        Mascota</button>
+                    <button class="btn-secondary btn-large" onclick="scrollToSection('citas')">Agendar Cita</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="registration-section" id="registro">
+        <div class="container">
+            <h2 class="section-title">Registro de Paciente</h2>
+            <div class="registration-container">
+                <div class="registration-form">
+                    <div class="steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Dueño</div>
+                        </div>
+                        <div class="step-divider"></div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Mascota</div>
+                        </div>
+                    </div>
+
+                    <form class="form-step active" id="step1">
+                        <h3 class="form-title">Información del Dueño</h3>
+                        <div class="form-group">
+                            <label for="ownerName">Nombre Completo</label>
+                            <input type="text" id="ownerName" placeholder="Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ownerEmail">Correo Electrónico</label>
+                            <input type="email" id="ownerEmail" placeholder="juan@ejemplo.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ownerPhone">Teléfono</label>
+                            <input type="tel" id="ownerPhone" placeholder="+56 9 1234 5678" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ownerAddress">Dirección</label>
+                            <input type="text" id="ownerAddress" placeholder="Calle Principal 123">
+                        </div>
+                        <button type="button" class="btn-primary btn-full" onclick="nextStep()">Continuar</button>
+                    </form>
+
+                    <form class="form-step" id="step2">
+                        <button type="button" class="btn-back" onclick="prevStep()">← Volver</button>
+                        <h3 class="form-title">Información de la Mascota</h3>
+                        <div class="form-group">
+                            <label for="petName">Nombre de la Mascota</label>
+                            <input type="text" id="petName" placeholder="Max" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Mascota</label>
+                            <div class="pet-type-selector">
+                                <div class="pet-type-option" data-type="dog" onclick="selectPetType('dog', event)">
+                                    <div class="pet-avatar">🐕</div>
+                                    <span>Perro</span>
+                                </div>
+                                <div class="pet-type-option" data-type="cat" onclick="selectPetType('cat', event)">
+                                    <div class="pet-avatar">🐱</div>
+                                    <span>Gato</span>
+                                </div>
+                                <div class="pet-type-option" data-type="bird" onclick="selectPetType('bird', event)">
+                                    <div class="pet-avatar">🐦</div>
+                                    <span>Ave</span>
+                                </div>
+                                <div class="pet-type-option" data-type="other" onclick="selectPetType('other', event)">
+                                    <div class="pet-avatar">🐰</div>
+                                    <span>Otro</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="petBreed">Raza</label>
+                                <input type="text" id="petBreed" placeholder="Labrador">
+                            </div>
+                            <div class="form-group">
+                                <label for="petAge">Edad</label>
+                                <input type="number" id="petAge" placeholder="3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="petNotes">Notas Adicionales</label>
+                            <textarea id="petNotes" rows="3" placeholder="Alergias, comportamiento..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary btn-full" onclick="submitRegistration(event)">Completar
+                            Registro</button>
+                    </form>
+                </div>
+
+                <div class="preview-sidebar">
+                    <h3 class="preview-title">Vista Previa</h3>
+                    <div class="preview-card">
+                        <div class="preview-section">
+                            <div class="preview-label">Dueño</div>
+                            <div class="preview-value" id="previewOwnerName">-</div>
+                            <div class="preview-detail" id="previewOwnerEmail">-</div>
+                            <div class="preview-detail" id="previewOwnerPhone">-</div>
+                        </div>
+                        <div class="preview-divider"></div>
+                        <div class="preview-section">
+                            <div class="preview-label">Mascota</div>
+                            <div class="pet-preview-avatar" id="previewPetAvatar">🐾</div>
+                            <div class="preview-value" id="previewPetName">-</div>
+                            <div class="preview-detail" id="previewPetInfo">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking-section" id="citas">
+        <div class="container">
+            <h2 class="section-title">Agendar Cita</h2>
+            <div class="booking-container">
+                <div class="booking-calendar">
+                    <div class="calendar-header">
+                        <button class="calendar-nav" onclick="changeMonth(-1)">←</button>
+                        <h3 class="calendar-month" id="calendarMonth">Abril 2026</h3>
+                        <button class="calendar-nav" onclick="changeMonth(1)">→</button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div>Lun</div>
+                        <div>Mar</div>
+                        <div>Mié</div>
+                        <div>Jue</div>
+                        <div>Vie</div>
+                        <div>Sáb</div>
+                        <div>Dom</div>
+                    </div>
+                    <div class="calendar-days" id="calendarDays"></div>
+                </div>
+
+                <div class="booking-details">
+                    <div class="service-selector">
+                        <h3 class="service-title">Seleccionar Servicio</h3>
+                        <div class="service-options">
+                            <div class="service-card" onclick="selectService('consulta', event)">
+                                <div class="service-icon">🩺</div>
+                                <div class="service-name">Consulta General</div>
+                                <div class="service-price">$25.000</div>
+                            </div>
+                            <div class="service-card" onclick="selectService('vacunacion', event)">
+                                <div class="service-icon">💉</div>
+                                <div class="service-name">Vacunación</div>
+                                <div class="service-price">$15.000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="time-slots">
+                        <h3 class="time-title">Horarios Disponibles</h3>
+                        <div class="time-grid" id="timeSlots">
+                            <button class="time-slot" onclick="selectTime('09:00', event)">09:00</button>
+                            <button class="time-slot" onclick="selectTime('10:00', event)">10:00</button>
+                            <button class="time-slot" onclick="selectTime('11:00', event)">11:00</button>
+                            <button class="time-slot" onclick="selectTime('12:00', event)">12:00</button>
+                        </div>
+                    </div>
+                    <button class="btn-primary btn-full btn-large" onclick="confirmBooking()">Confirmar Cita</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 VetCare. Tu mascota en las mejores manos.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
